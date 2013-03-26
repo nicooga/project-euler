@@ -4,8 +4,6 @@
 # There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 # Find the product abc.
 
-require 'awesome_print'
-
 def pitagoric_triplet?(a,b,c)
   (a**2 + b**2) == c**2
 end
