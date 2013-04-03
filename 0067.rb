@@ -13,7 +13,7 @@
 
 require_relative 'stuff/triangle'
 
-t = File.read("#{Dir.pwd}/stuff/triangle.txt")
+t = File.read("stuff/triangle.txt")
 
 def solution(t)
   Tree.new(t).max_path
