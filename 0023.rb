@@ -4,14 +4,18 @@
 # Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
 require_relative 'stuff/perfect.rb'
+require 'set'
 
 def solution
   abundant_numbers = (12..28123).select(&:abundant?)
-  ary = abundant_numbers
-  .product(abundant_numbers)
-  .map { |p| p.reduce(:+) }
-  .uniq
-  ((24..28123).to_a - ary).reduce(:+)
+  inverse_set = abundant_numbers.each.with_index.inject([]) do |a,(n,index)|
+    a.concat(
+      abundant_numbers[index..abundant_numbers.size-1]
+      .take_while { |i| (n+i) <= 28123 }.map { |i| n+i }
+    )
+  end.uniq.to_set
+  solution_set = (1..28123).to_set - inverse_set
+  solution_set.reduce(:+)
 end
 
 puts "Solution: #{solution}"
