@@ -4,7 +4,7 @@ class Numeric
   def divisible_by?(n); (self%n).zero?; end
 
   def divisor_count
-    @divisor_count ||= prime_division.map do |n,p|
+    @divisors_count ||= prime_division.map do |n,p|
       (0..p).map { |i| n**i }
     end.inject do |a,f|
       a.product(f)
@@ -12,7 +12,7 @@ class Numeric
   end
 
   def divisors
-    return @divisors ||= [self] if self == 1
+    return [self] if self == 1
     @divisors ||= prime_division.map do |n,p|
       (0..p).map { |i| n**i }
     end.inject([1]) do |a,f|
@@ -21,7 +21,7 @@ class Numeric
   end
 
   def divisors_sum
-    @div_sum ||= divisors.reduce(:+)
+    @divisors_sum ||= divisors.reduce(:+)
   end
 
   alias_method :div_sum, :divisors_sum

@@ -7,15 +7,9 @@ require_relative 'stuff/perfect.rb'
 require 'set'
 
 def solution
-  abundant_numbers = (12..28123).select(&:abundant?)
-  inverse_set = abundant_numbers.each.with_index.inject([]) do |a,(n,index)|
-    a.concat(
-      abundant_numbers[index..abundant_numbers.size-1]
-      .take_while { |i| (n+i) <= 28123 }.map { |i| n+i }
-    )
-  end.uniq.to_set
-  solution_set = (1..28123).to_set - inverse_set
-  solution_set.reduce(:+)
+  xs = (1..28123)
+  abundants = xs.select(&:abundant?)
+  solution = (xs.to_set - abundants.repeated_combination(2).to_set { |x, y| x + y }).sum
 end
 
 puts "Solution: #{solution}"

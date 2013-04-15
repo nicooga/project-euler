@@ -2,14 +2,10 @@
 # If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
 # NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
 
-require 'numbers_and_words'
+require_relative 'stuff/words'
 
 def solution(numbers)
-  numbers.map { |e| e.to_words.gsub(/\s|\-/, '').size }
+  numbers.map { |e| e.to_words.gsub(/\s|\-/, '').size }.reduce(:+)
 end
 
-class Numeric
-  def to_words
-    
-  end
-end
+puts "Solution: #{solution(1..1000)}"
