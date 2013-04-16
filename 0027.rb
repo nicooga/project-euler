@@ -14,29 +14,17 @@
 # e.g. |11| = 11 and |4| = 4
 # Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
 
-require 'awesome_print'
-require 'prime'
+require_relative 'stuff/cuadratic_prime_generator'
 
 def solution
-  euler_size = ->(a,b) do
-    count, x = 0, 1
-    while ((x**2) + ((a)*x) + b).prime?
-      x += 1
-      count += 1
-    end
-    count
-  end
-
-  b_set = (-1000..1000).select(&:prime?)
-
-  # (-1000..1000).map do |a|
-  #   b_set.map do |b|
-  #     [[a,b], euler_size[a,b]] 
-  #   end.max_by(&:last)
-  # end.max_by(&:last)
-
-  ap euler_size[-61,97]
-  ap euler_size[1,41]
+  a_set = (-999..999).select(&:odd?)
+  b_set = (-999..999).select(&:prime?)
+  
+  a_set.map do |a|
+    b_set.map do |b|
+      CuadraticPrimeGenerator.new(a,b)
+    end.max_by(&:euler_size)
+  end.max_by(&:euler_size).coefficients.reduce(:*)
 end
 
-solution
+puts "Solution: #{solution}"
