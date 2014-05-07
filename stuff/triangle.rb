@@ -11,7 +11,7 @@ class Tree
     end
     @size = tmp.size
     @nodes = tmp.map.with_index do |row, y|
-      row.map.with_index do |node, x| 
+      row.map.with_index do |node, x|
         Node.new(
           value: node,
           x: x,

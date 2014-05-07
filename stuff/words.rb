@@ -34,7 +34,7 @@ class Integer
   def to_words
     return NUMERALS[self] if NUMERALS[self]
     return NUMERALS[self/100] + ' hundred' if (self%100).zero?
-    
+
     h = self / 100
     t = self % 100 / 10
     u = self % 100 % 10
